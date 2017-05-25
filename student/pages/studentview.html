@@ -1,0 +1,36 @@
+﻿<div ng-controller="studentcontroller">
+    <!--grid or table-->
+    <div>
+        <h1>STUDENT DASHBOARD</h1>
+
+    </div>
+    <div>
+        <input type="button" class="btn btn-default" ng-click="addstudent()" value="Add Student"/>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Date Of Birth</th>
+                <th>City</th>
+                <th>State</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="st in studentlist">
+                <td>{{st.firstName}} </td>
+                <td>{{st.lastName}} </td>
+                <td>{{st.age}} </td>
+                <td>{{st.dateOfBirth}} </td>
+                <td>{{st.city}} </td>
+                <td>{{st.state}} </td>
+                <td><input type="button" class="btn btn-default" value="Edit" />
+                     <input type="button" class="btn btn-default" value="Delete"/>
+                </td>
+
+            </tr>
+        </table>
+
+    </div>
+</div>

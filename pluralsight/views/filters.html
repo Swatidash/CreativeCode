@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+    <title>Filters</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script>
+     
+  
+        angular.module("exampleApp", [])
+        .controller("defaultCtrl", function ($scope) {
+            $scope.products = [
+                { name: "apples", category: "Fruit", price: 1.20, expiry: 10 },
+                    { name: "bananas", category: "Fruit", price: 2.42, expiry: 7 },
+                    { name: "Pears", category: "Fruit", price: 2.02, expiry: 6 },
+
+                    { name: "Tuna", category: "Fish", price: 20.45, expiry: 3 },
+                    { name: "Salmon", category: "Fish", price: 17.93, expiry: 2 },
+                    { name: "Trout", category: "Fish", price: 12.93, expiry: 4 },
+
+                    { name: "Beer", category: "Drinks", price: 2.99, expiry: 365 },
+                    { name: "Wine", category: "Drinks", price: 8.99, expiry: 365 },
+                    { name: "Whiskey", category: "Drinks", price: 45.99, expiry: 365 }
+            ];
+
+            $scope.myCustomSorter = function(item) {
+                return item.expiry < 5 ? 0 : item.price;
+            }
+            //$scope.limitVal = "5";
+            //$scope.limitRange = [];
+            //$scope.filterName = "";
+            //$scope.FilterCategory=""
+            //for (var i = (0 - $scope.products.length) ; i <= $scope.products.length; i++) {
+            //    $scope.limitRange.push(i.toString());
+            //}
+
+            //$scope.selectItems = function (item) {
+
+            //    if ($scope.FilterCategory != '' && $scope.filterName != '')
+            //        return item.category == $scope.FilterCategory && item.name == $scope.filterName;
+            //    else if ($scope.FilterCategory != '')
+            //        return item.category == $scope.FilterCategory;
+            //    else if ($scope.filterName != '')
+            //        return item.name == $scope.filterName;
+            //    else
+            //        return item;
+
+           // };
+            //$scope.getExpiryDate = function (days) {
+            //    var now = new Date();
+            //    return now.setDate(now.getDate() + days);
+            //}
+            //$scope.product={name: "",categoryName: "",price: 0,expiry: 0};
+            //$scope.addNewProduct = function () {
+            //    $scope.products.push(
+            //        {
+            //            name: $scope.product.name,
+            //            category: $scope.product.categoryName,
+            //            price: $scope.product.price,
+            //            expiry: $scope.product.expiry
+            //        }
+            //    );
+            //}
+
+
+
+            // for (var i = 0; i < $scope.products.length; i++) {
+            //$scope.products[i].price = "$" + Number($scope.products[i].price).toFixed(2);
+            //}
+        });
+
+    </script>
+    <script src="../angularjs/customFilters.js"></script>
+</head>
+<body ng-controller="defaultCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>
+                Products
+                <span class="label label-primary">{{products.length}}</span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            Limit: <select ng-model="limitVal" ng-options="item for item in limitRange"></select>
+        </div>
+        <div class="panel-body">
+
+            <table class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <td><input type="text" ng-model="filterName" /></td>
+                        <td><input type="text" ng-model="FilterCategory" /></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>Category</td>
+                        <td>Expiry</td>
+                        <td class="text-right">Price</td>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="p in products | take:2:5">
+                       <td>{{p.name}}</td>
+                        <td>{{p.category}}</td>
+                        <td>{{p.expiry}}</td>
+                        <td class="text-right">{{p.price | currency }}</td>
+                    </tr>
+                        
+                    
+                    <tr>
+                        <td><input type="text" ng-model="product.name" /></td>
+                        <td><input type="text" ng-model="product.categoryName" /></td>
+                        <td><input type="text" ng-model="product.expiry" /></td>
+                        <td><input type="text" ng-model="product.price" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right"><button ng-click="addNewProduct()">Add</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
